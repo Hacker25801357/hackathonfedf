@@ -1,0 +1,53 @@
+========================================
+FIX: IP ADDRESS WHITELIST ISSUE
+========================================
+
+Your MongoDB Atlas connection string is correct!
+But your IP address needs to be allowed to connect.
+
+FOLLOW THESE STEPS:
+
+1. Go to MongoDB Atlas: https://cloud.mongodb.com/
+
+2. Log in with your account
+
+3. Click on "Network Access" (left sidebar)
+   - Under "Security" section
+   - OR go to: https://cloud.mongodb.com/v2#/security/network/accessList
+
+4. Click "ADD IP ADDRESS" button
+
+5. Choose ONE option:
+
+   OPTION A (Recommended for Development):
+   ----------------------------------------
+   - Click "ALLOW ACCESS FROM ANYWHERE"
+   - This will add: 0.0.0.0/0
+   - Description: "Allow all IPs"
+   - Click "Confirm"
+
+   OPTION B (Your Current IP Only):
+   ---------------------------------
+   - Click "ADD CURRENT IP ADDRESS"
+   - It will auto-detect your IP
+   - Description: "My IP"
+   - Click "Confirm"
+
+6. Wait 1-2 minutes for the change to take effect
+
+7. Your backend server will automatically reconnect!
+
+========================================
+AFTER ADDING IP ADDRESS:
+========================================
+
+You should see in your backend terminal:
+✅ "MongoDB Connected: eduresourcehub-shard-00-00.2fkswz4.mongodb.net"
+
+Then run:
+cd C:\Users\rajes\hackathon\backend
+npm run seed
+
+This will populate your database with sample data!
+
+========================================

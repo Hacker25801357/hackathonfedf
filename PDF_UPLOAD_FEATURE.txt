@@ -1,0 +1,135 @@
+================================================================
+PDF FILE UPLOAD FEATURE - NOW AVAILABLE!
+================================================================
+
+✅ WHAT'S NEW:
+
+You can now upload PDF files directly when adding resources!
+No need to manually provide URLs anymore.
+
+================================================================
+HOW TO USE:
+================================================================
+
+1. **Login as Admin**
+   - Email: admin@edu.com
+   - Password: admin123
+
+2. **Go to "Manage Resources"**
+
+3. **Click "Add New Resource"**
+
+4. **Choose Upload Method:**
+   You'll see TWO options:
+
+   📌 **Provide URL** (Original method)
+   - Paste a URL to an existing PDF file
+   - Manually enter file name and size
+   
+   📄 **Upload PDF** (NEW!)
+   - Click to select a PDF file from your computer
+   - Max file size: 10MB
+   - Only PDF files accepted
+   - Automatic file name and size detection
+
+5. **Fill in Other Details:**
+   - Title
+   - Type (Textbook, Research Paper, etc.)
+   - Subject
+   - Description
+   - Tags (optional)
+
+6. **Click "Create Resource"**
+
+================================================================
+FEATURES:
+================================================================
+
+✅ **File Validation:**
+   - Only PDF files allowed
+   - Maximum size: 10MB
+   - Instant validation feedback
+
+✅ **Upload Progress:**
+   - Real-time progress bar
+   - Shows upload percentage
+   - Visual feedback during upload
+
+✅ **Automatic Details:**
+   - File name extracted automatically
+   - File size calculated automatically
+   - No manual entry needed
+
+✅ **Beautiful UI:**
+   - Toggle buttons to switch upload methods
+   - Drag-and-drop style file selector
+   - File info display with size in MB
+   - Purple gradient progress bar
+
+✅ **Secure:**
+   - Admin authentication required
+   - File type verification
+   - Size limit enforcement
+
+================================================================
+FILE STORAGE:
+================================================================
+
+Uploaded files are stored in:
+📁 backend/uploads/
+
+Files are named with unique identifiers to prevent conflicts:
+Example: resource-1234567890-987654321.pdf
+
+Files are served as static resources at:
+http://localhost:5000/uploads/filename.pdf
+
+================================================================
+TECHNICAL DETAILS:
+================================================================
+
+**Frontend:**
+- Two upload modes: URL or File
+- File validation (type and size)
+- Upload progress tracking
+- Axios for file upload with progress events
+
+**Backend:**
+- Multer middleware for file handling
+- Automatic upload directory creation
+- Unique filename generation
+- File type filtering (PDF only)
+- Size limit: 10MB
+- Static file serving
+
+**Supported File Type:**
+- PDF (.pdf)
+- MIME type: application/pdf
+
+================================================================
+TESTING:
+================================================================
+
+1. Create a test PDF file (or use any existing PDF)
+2. Login as admin
+3. Click "Add New Resource"
+4. Choose "Upload PDF" option
+5. Select your PDF file
+6. Watch the progress bar fill up
+7. Complete the form and submit
+8. Resource will be created with the uploaded file
+
+The file will be accessible for download by all users!
+
+================================================================
+BENEFITS:
+================================================================
+
+✨ No need to host files externally
+✨ Easier resource creation
+✨ Better file management
+✨ Centralized storage
+✨ Automatic file handling
+✨ User-friendly interface
+
+================================================================

@@ -1,0 +1,88 @@
+================================================================
+REGISTRATION UPDATED - ROLE SELECTOR ADDED
+================================================================
+
+✅ WHAT'S NEW:
+
+The registration form now includes an "Account Type" dropdown!
+
+You can now choose:
+- User (default) - Browse, search, download, and review resources
+- Admin - Full access to create, edit, delete resources and manage users
+
+================================================================
+HOW TO USE:
+================================================================
+
+1. Go to the Registration page
+2. Fill in your details:
+   - Name
+   - Email
+   - Password
+   - Confirm Password
+3. NEW: Select "Account Type"
+   - Choose "User" for regular access
+   - Choose "Admin" for administrative access
+4. Click "Register"
+
+================================================================
+QUICK TEST:
+================================================================
+
+Register an Admin Account:
+- Name: Test Admin
+- Email: testadmin@edu.com
+- Password: admin123
+- Confirm Password: admin123
+- Account Type: Admin ← SELECT THIS!
+
+Register a User Account:
+- Name: Test User
+- Email: testuser@edu.com
+- Password: user123
+- Confirm Password: user123
+- Account Type: User
+
+================================================================
+EXISTING ACCOUNTS (From Seed Data):
+================================================================
+
+Admin Account:
+- Email: admin@edu.com
+- Password: admin123
+
+User Accounts:
+- Email: john@edu.com / Password: user123
+- Email: jane@edu.com / Password: user123
+
+================================================================
+WHAT EACH ROLE CAN DO:
+================================================================
+
+USER ROLE:
+✅ Browse all resources
+✅ Search and filter
+✅ View resource details
+✅ Download resources
+✅ Leave ratings and reviews
+❌ Cannot create/edit/delete resources
+❌ Cannot view user management
+
+ADMIN ROLE:
+✅ Everything a User can do, PLUS:
+✅ Create new resources
+✅ Edit existing resources
+✅ Delete resources
+✅ View all users
+✅ Access admin dashboard with statistics
+✅ Manage the entire library
+
+================================================================
+TRY IT NOW:
+================================================================
+
+1. Refresh your browser or go to: http://localhost:3000/register
+2. You'll see the new "Account Type" dropdown
+3. Create a new admin account to test all features!
+
+================================================================
