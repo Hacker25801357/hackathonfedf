@@ -1,0 +1,26 @@
+# Netlify configuration file
+[build]
+  # Publish directory (where the built files are located)
+  publish = "frontend/dist"
+  
+  # Build command
+  command = "cd frontend && npm install && npm run build"
+  
+  # Base directory
+  base = "."
+
+# Redirect API calls to your backend server
+[[redirects]]
+  from = "/api/*"
+  to = "https://your-backend-server.com/api/:splat"
+  status = 200
+  
+# Redirect all other requests to index.html for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variables (you'll need to set these in Netlify dashboard)
+[template.environment]
+  REACT_APP_API_URL = "Your backend API URL (e.g., https://your-backend-server.com)"

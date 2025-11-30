@@ -244,7 +244,32 @@ hackathon/
 
 ## 🚀 Deployment
 
-### Backend Deployment (Example: Heroku)
+### Backend Deployment (Multiple Options)
+
+#### Option 1: Render (Recommended for Free Tier)
+```bash
+# Create account at render.com
+# Create new Web Service
+# Connect your repository
+# Configure:
+# - Build command: npm install
+# - Start command: npm start
+# - Environment variables:
+#   - MONGODB_URI = your_mongodb_uri
+#   - JWT_SECRET = your_jwt_secret
+#   - JWT_EXPIRE = 7d
+#   - PORT = 10000 (Render's default)
+```
+
+#### Option 2: Railway
+```bash
+# Create account at railway.app
+# Create new project
+# Deploy from GitHub
+# Set environment variables in dashboard
+```
+
+#### Option 3: Heroku
 ```bash
 # Install Heroku CLI
 # Login to Heroku
@@ -256,12 +281,27 @@ heroku create your-app-name
 # Set environment variables
 heroku config:set MONGODB_URI=your_mongodb_uri
 heroku config:set JWT_SECRET=your_jwt_secret
+heroku config:set JWT_EXPIRE=7d
 
 # Deploy
 git push heroku main
 ```
 
-### Frontend Deployment (Example: Vercel)
+### Frontend Deployment
+
+#### Option 1: Netlify (Recommended)
+```bash
+# Fork this repository or push to your Git provider
+# Connect Netlify to your repository
+# Configure build settings:
+# - Build command: cd frontend && npm install && npm run build
+# - Publish directory: frontend/dist
+# Add environment variable in Netlify dashboard:
+# - REACT_APP_API_URL = https://your-deployed-backend.com/api
+# Deploy!
+```
+
+#### Option 2: Vercel
 ```bash
 # Install Vercel CLI
 npm i -g vercel
@@ -270,6 +310,16 @@ npm i -g vercel
 vercel
 
 # Update API URL in src/utils/api.js to your backend URL
+```
+
+#### Option 3: Manual Deployment
+```bash
+# Build the frontend
+cd frontend
+npm run build
+
+# The built files will be in the dist/ folder
+# Upload these files to any static hosting provider
 ```
 
 ## 📝 Environment Variables

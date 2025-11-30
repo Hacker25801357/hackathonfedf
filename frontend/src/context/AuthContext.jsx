@@ -25,9 +25,26 @@ export const AuthProvider = ({ children }) => {
       if (token && userData) {
         try {
           setUser(JSON.parse(userData));
-          // Optionally verify token
-          const response = await authAPI.getMe();
-          setUser(response.data.data);
+          // Try to verify token; if it fails attempt refresh using HttpOnly cookie
+          try {
+            const response = await authAPI.getMe();
+            setUser(response.data.data);
+          } catch (err) {
+            console.warn('getMe failed, attempting refresh token', err?.response?.status);
+            // attempt refresh (server will read refresh cookie)
+            try {
+              const refreshRes = await authAPI.refresh();
+              const refreshed = refreshRes.data.data;
+              localStorage.setItem('token', refreshed.token);
+              localStorage.setItem('user', JSON.stringify(refreshed));
+              setUser(refreshed);
+            } catch (refreshErr) {
+              console.error('Refresh failed:', refreshErr);
+              localStorage.removeItem('token');
+              localStorage.removeItem('user');
+              setUser(null);
+            }
+          }
         } catch (err) {
           console.error('Auth verification failed:', err);
           localStorage.removeItem('token');

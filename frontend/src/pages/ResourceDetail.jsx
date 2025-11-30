@@ -41,7 +41,7 @@ const ResourceDetail = () => {
       // Handle both full URLs and relative paths
       let downloadUrl = resource.fileUrl;
       if (downloadUrl.startsWith('/uploads/')) {
-        downloadUrl = `http://localhost:5000${downloadUrl}`;
+        downloadUrl = `${import.meta.env.VITE_API_URL}${downloadUrl}`;
       }
       
       window.open(downloadUrl, '_blank');
@@ -52,7 +52,7 @@ const ResourceDetail = () => {
       // Handle both full URLs and relative paths
       let downloadUrl = resource.fileUrl;
       if (downloadUrl.startsWith('/uploads/')) {
-        downloadUrl = `http://localhost:5000${downloadUrl}`;
+        downloadUrl = `${import.meta.env.VITE_API_URL}${downloadUrl}`;
       }
       
       window.open(downloadUrl, '_blank');

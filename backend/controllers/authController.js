@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 import User from '../models/User.js';
-import { generateToken } from '../utils/tokenUtils.js';
+import { generateToken, generateRefreshToken, verifyRefreshToken } from '../utils/tokenUtils.js';
 
 // @desc    Register new user
 // @route   POST /api/auth/register
@@ -36,8 +36,18 @@ export const register = async (req, res) => {
       role: role || 'user'
     });
 
-    // Generate token
+    // Generate tokens
     const token = generateToken(user._id);
+    const refreshToken = generateRefreshToken(user._id);
+
+    // Set refresh token as HttpOnly cookie
+    const refreshMaxAge = parseInt(process.env.REFRESH_TOKEN_MAX_AGE_MS) || 7 * 24 * 60 * 60 * 1000; // 7 days
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: refreshMaxAge
+    });
 
     res.status(201).json({
       success: true,
@@ -97,8 +107,18 @@ export const login = async (req, res) => {
       });
     }
 
-    // Generate token
+    // Generate tokens
     const token = generateToken(user._id);
+    const refreshToken = generateRefreshToken(user._id);
+
+    // Set refresh token as HttpOnly cookie
+    const refreshMaxAge = parseInt(process.env.REFRESH_TOKEN_MAX_AGE_MS) || 7 * 24 * 60 * 60 * 1000; // 7 days
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: refreshMaxAge
+    });
 
     res.json({
       success: true,
@@ -144,5 +164,43 @@ export const getMe = async (req, res) => {
       message: 'Error fetching user data',
       error: error.message
     });
+  }
+};
+
+// @desc    Refresh access token
+// @route   POST /api/auth/refresh
+// @access  Public (uses refresh cookie)
+export const refreshToken = async (req, res) => {
+  try {
+    const { refreshToken } = req.cookies || {};
+    if (!refreshToken) {
+      return res.status(401).json({ success: false, message: 'No refresh token' });
+    }
+
+    const payload = verifyRefreshToken(refreshToken);
+    if (!payload || !payload.id) {
+      return res.status(401).json({ success: false, message: 'Invalid refresh token' });
+    }
+
+    const user = await User.findById(payload.id);
+    if (!user) {
+      return res.status(401).json({ success: false, message: 'User not found' });
+    }
+
+    const newAccessToken = generateToken(user._id);
+
+    res.json({
+      success: true,
+      data: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        token: newAccessToken
+      }
+    });
+  } catch (error) {
+    console.error('Refresh token error:', error);
+    res.status(500).json({ success: false, message: 'Error refreshing token' });
   }
 };
